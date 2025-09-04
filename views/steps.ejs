@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/logofundo.jpg" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="/steps.css"> -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/steps.css">
+    <title>Acompanhamento</title>
+</head>
+<body>
+    <header id="header-steps" class="text-center my-4">
+        <img src="/logo-grande.png" alt="foto da empresa" class="img-fluid" style=" max-height: 100px;">
+    </header>
+    <section id="home-steps">
+        <div class="container">
+            <% if(task_list == null) { %>
+                <div class="card p-4 shadow-sm mb-4">
+                    <h2 class="mb-3">Rastreie seu Reporte!</h2>
+                    <form action="/page_edit_report" method="post" class="forms-container">
+                        <div class="forms-1 mb-3">
+                            <label for="#" class="form-label">Coloque o número do seu Protocolo:</label>
+                            <input type="text" name="protocolo" class="form-control input-steps" placeholder=" Insira o número" required>
+                        </div>
+                        <div class="forms-2">
+                            <button type="submit" class="btn btn-primary btn-consultar w-100">Consultar</button>
+                        </div>
+                    </form>
+                </div>
+            <% } else { %>
+                <div class="card p-4 shadow-sm mb-4">
+                    <h2 class="mb-3">Rastreie seu Reporte!</h2>
+                    <form action="/page_edit_report" method="post" class="forms-container">
+                        <div class="forms-1 mb-3">
+                            <label for="#" class="form-label">Coloque o número do seu Protocolo:</label>
+                            <input type="text" name="protocolo" class="form-control input-steps" value="<%= task_list.protocol %>" required>
+                        </div>
+                        <div class="forms-2">
+                            <button type="submit" class="btn btn-primary btn-consultar w-100">Atualizar</button>
+                        </div>
+                    </form>
+                </div>
+            <% } %>
+            <div class="card p-4 shadow-sm mb-4">
+                <% if (task_list) { %>
+                    <div id="view-section">
+                        <p class="protocolo_cliente"><label for="" style="margin-right: 5px;">N° do Protocolo: </label><%= task_list.protocol %></p>
+                        <p class="protocolo_cliente"><label for="" style="margin-right: 5px;">Nome do Cliente: </label><%= task_list.client %></p>
+                        <p class="protocolo_cliente"><label for="" style="margin-right: 5px;">Email: </label><%= task_list.email %></p>
+                        <p class="protocolo_cliente"><label for="" style="margin-right: 5px;">Senha: </label><%= task_list.senha %></p>
+                        <p class="protocolo_cliente"><label for="" style="margin-right: 5px;">Data do Reporte: </label><%= task_list.data.toLocaleDateString('pt-BR', {timeZone: 'America/Sao_Paulo', hour12: false, year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'}) %></p>
+                        <p class="protocolo_cliente"><label for="" style="margin-right: 5px;">Técnico: </label><%= task_list.tecnico %></p>
+                        <p class="protocolo_cliente"><label for="" style="margin-right: 5px;">Módulo: </label><%= task_list.modulo %></p>
+                        <% if(task_list.outro_modulo) { %>
+                            <p class="protocolo_cliente"><label for="" style="margin-right: 5px;">Outros: </label><%= task_list.outro_modulo %></p>
+                        <% } else { %>
+                            <p style="display: none;"><label for="" style="margin-right: 5px;">Outros: </label><%= task_list.outro_modulo %></p>
+                        <% } %>
+                        <p class="protocolo_cliente"><label for="" style="margin-right: 5px;">Descrição do Erro: </label><%= task_list.descricao %></p>
+                        <% if(task_list.link_erro) { %>
+                            <p class="protocolo_cliente"><a href="<%= task_list.link_erro %>" class="link-primary" target="_blank" style="margin-right: 5px; text-decoration: none; font-weight: 500">Link do Erro</a></p>
+                        <% } else { %>
+                            <p style="display: none;"><a href="<%= task_list.link_erro %>" >Link do Erro</a></p>
+                        <% } %>
+                        <p class="protocolo_cliente"><label for="" style="margin-right: 5px;">Status: </label><%= task_list.etapa %></p>
+                        <button type="button" class="btn btn-warning btn-edit-report mt-2" onclick="toggleEditMode()">Editar</button>
+                    </div>
+
+                    <div id="edit-section" style="display: none;">
+                        <form action="/update_report" method="post">
+                            <div class="protocolo-edit-cliente mb-3">
+                                <label for="protocolo" class="form-label">N° do Protocolo: </label>
+                                <input type="text" name="protocolo" class="form-control" value="<%= task_list.protocol %>" readonly>
+                            </div>
+                            <div class="protocolo-edit-cliente mb-3">
+                                <label for="name" class="form-label">Nome do Cliente: </label>
+                                <input type="text" name="client" class="form-control" value="<%= task_list.client %>">
+                            </div>
+                            <div class="protocolo-edit-cliente mb-3">
+                                <label for="email" class="form-label">Email: </label>
+                                <input type="email" name="email" class="form-control" value="<%= task_list.email %>" required>
+                            </div>
+                            <div class="protocolo-edit-cliente mb-3">
+                                <label for="senha" class="form-label">Senha: </label>
+                                <input type="text" name="senha" class="form-control" value="<%= task_list.senha %>" required>
+                            </div>
+                            <div class="protocolo-edit-cliente mb-3">
+                                <label for="name" class="form-label">Técnico: </label>
+                                <select class="form-select" name="tecnico" id="tecnico" required>
+                                    <option value="<%= task_list.tecnico %>"><%= task_list.tecnico %></option>
+                                    <option value="Douglas">Douglas</option>
+                                    <option value="Vagner">Vagner</option>
+                                    <option value="Wendell">Wendell</option>
+                                </select>
+                            </div>
+                            <div class="protocolo-edit-cliente mb-3">
+                                <label for="modulo" class="form-label">Módulo: </label>
+                                <input type="text" name="modulo" class="form-control" value="<%= task_list.modulo %>" required>
+                            </div>
+                            <% if(task_list.outro_modulo) { %>
+                                <div class="protocolo-edit-cliente mb-3">
+                                    <label for="outro_modulo" class="form-label">Outros: </label>
+                                    <input type="text" name="outro_modulo" class="form-control" value="<%= task_list.outro_modulo %>">
+                                </div>
+                            <% } else { %>
+                                <div style="display: none;">
+                                    <label for="outro_modulo" class="form-label">Outros: </label>
+                                    <input type="text" name="outro_modulo" class="form-control" value="<%= task_list.outro_modulo %>">
+                                </div>
+                            <% } %>
+                            <div class="protocolo-edit-cliente mb-3">
+                                <label for="descricao" class="form-label">Descrição do Erro: </label>
+                                <textarea name="descricao" class="form-control"><%= task_list.descricao %></textarea>
+                            </div>
+                            <div class="protocolo-edit-cliente mb-3">
+                                <label for="link_erro" class="form-label">Link do Erro: </label>
+                                <input type="text" name="link_erro" class="form-control" value="<%= task_list.link_erro %>" required>
+                            </div>
+                            <div class="protocolo-edit-cliente mb-3">
+                                <label for="etapa" class="form-label">Status: </label>
+                                <select name="etapa" class="form-select" required>
+                                    <option value="Solicitação Reportada" <%= task_list.etapa === 'Solicitação Reportada' ? 'selected' : '' %>> Solicitação Reportada</option>
+                                    <option value="Solicitação em Análise" <%= task_list.etapa === 'Solicitação em Análise' ? 'selected' : '' %>> Solicitação em Análise</option>
+                                    <option value="Homologação" <%= task_list.etapa === 'Homologação' ? 'selected' : '' %>> Homologação</option>
+                                    <option value="Producao" <%= task_list.etapa === 'Produção' ? 'selected' : '' %>>Produção</option>
+                                </select>
+                            </div>
+                            <div class="forms-2 d-flex gap-2">
+                                <button type="submit" class="btn btn-success btn-consultar-edit flex-fill">Atualizar</button>
+                                <button type="button" class="btn btn-secondary btn-cancel flex-fill" onclick="toggleViewMode()">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                <% } else { %>
+                    <p>Protocolo não encontrado. Por favor, verifique o número.</p>
+                <% } %>
+            </div>
+            <div class="card p-4 shadow-sm mb-4">
+                <h2 class="mb-3">Exportar Relatórios por Cliente</h2>
+                <form action="/export_data" method="POST">
+                    <div class="mb-3">
+                        <label for="client" class="form-label">Nome do Cliente:</label>
+                        <input type="text" class="form-control" id="client" name="client" placeholder="Insira o nome do cliente" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-edit-report">Exportar Dados</button>
+                </form>
+            </div>
+            <% if (task_list) { %>
+                <div class="card p-4 shadow-sm mb-4">
+                    <div class="elements">
+                        <h5>Histórico do Cliente: <span><%= task_list.client %></span></h5>
+                        <button id="botaoMostrar"><i class="bi bi-arrow-down-short arrow-icon"></i></button>
+                    </div>
+                    <% if (history_list && history_list.length > 0) { %>
+                        <div id="conteudoOculto" class="data-container">
+                            <ul>
+                                <% history_list.forEach(reporte => { %>
+                                    <li>
+                                        <strong>Protocolo:</strong> <%= reporte.protocol %><br>
+                                        <strong>Data:</strong> <%= reporte.data.toLocaleDateString('pt-BR') %><br>
+                                        <strong>Status:</strong> <%= reporte.etapa %><br>
+                                    </li>
+                                <% }); %>
+                            </ul>
+                        </div>
+                    <% } else { %>
+                        <p>Nenhum outro reporte encontrado para este cliente.</p>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/script.js"></script>
+</body>
+</html>

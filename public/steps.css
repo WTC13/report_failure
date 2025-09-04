@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Staatliches&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Poppins','Courier New', Courier, monospace;
+}
+
+html{
+    scroll-behavior: smooth
+}
+
+:root{
+    --bg-blue: #3090dd ;
+    --bg-gray: #ececec;
+    --bg-black: #28282e;
+    --bg-white: #f8f6f6;
+}
+
+.elements{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#botaoMostrar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#botaoMostrar i{
+    color: var(--bg-blue);
+    font-size: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container de dados, agora com max-height e overflow */
+.data-container {
+    /* Estado inicial: altura zero e conteúdo escondido */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    
+    /* Transição suave para a altura, opacidade e espaçamento */
+    transition: max-height 0.8s ease-in-out, opacity 0.8s ease-in-out, margin 0.8s ease-in-out;
+}
+
+/* Estado final: altura máxima e visível */
+.data-container.show {
+    /* Defina um valor grande para a altura máxima */
+    max-height: 500px;
+    opacity: 1;
+}
+
+.arrow-icon {
+    transition: transform 0.3s ease-in-out;
+}
+
+.arrow-icon.rotated {
+    transform: rotate(180deg);
+}
+
+/* body{
+    background-color: var(--bg-white);
+}
+
+#header-steps{
+    background-color: var(--bg-blue);
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#header-steps img{
+    height: 85px;
+    width: 250px;
+    position: absolute;
+    border: var(--bg-black) solid 1.5px;
+    border-radius: 5px;
+}
+
+#home-steps{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    min-height: 80vh;
+}
+
+.home-steps-container{
+    width: 60%;
+    height: 80vh;
+    background-color: var(--bg-gray);
+    border: var(--bg-black) solid 1.5px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.home-container-1{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-home-steps,
+.forms-container{
+    margin: 10px;
+}
+
+.forms-container{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+.forms-1{
+    display: flex;
+    flex-direction: column;
+}
+
+.forms-1 label{
+    margin-bottom: 7px;
+}
+
+.forms-2{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.input-steps{
+    width: 300px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    border: var(--bg-black) solid 0.5px;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.btn-consultar{
+    padding: 10px;
+    background-color: var(--bg-blue);
+    border: var(--bg-black) solid 1.5px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 1.5px 1.5px var(--bg-black);
+}
+
+.home-container-2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+
+.home-container-2 p{
+    color: var(--bg-black);
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.btn-edit-report{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+    background-color: var(--bg-blue);
+    color: var(--bg-black);
+    border: var(--bg-black) solid 1.5px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 1.5px 1.5px var(--bg-black);
+    margin-bottom: 10px;
+}
+
+.btn-consultar:hover,
+.btn-edit-report:hover{
+    background-color: var(--bg-black);
+    color: var(--bg-gray);
+}
+
+.home-steps-container-2{
+    display: flex;
+    flex-direction: column;
+}
+
+#view-section{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+
+#edit-section{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+.protocolo-edit-cliente{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.protocolo-edit-cliente input{
+    border: var(--bg-black) solid 1.5px;
+    border-radius: 5px;
+    width: 300px;
+    height: 30px;
+    background-color: var(--bg-black);
+    color: var(--bg-gray);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 2px;
+}
+
+.protocolo-edit-cliente textarea{
+    width: 300px;
+}
+
+.protocolo-edit-cliente textarea,
+.protocolo-edit-cliente select{
+    background-color: var(--bg-black);
+    color: var(--bg-gray);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+    border: var(--bg-black) solid 1.5px;
+    padding: 2px;
+}
+
+.btn-consultar-edit,
+.btn-cancel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    height: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    border: var(--bg-black) solid 1.5px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 1.5px 1.5px var(--bg-black);
+}
+
+.btn-consultar-edit{
+    background-color: var(--bg-blue);
+    color: var(--bg-black);
+}
+
+.btn-cancel{
+    background-color: var(--bg-black);
+    color: var(--bg-blue);
+} */
+

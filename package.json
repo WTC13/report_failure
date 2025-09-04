@@ -1,0 +1,27 @@
+{
+  "name": "report_failure_manageasy",
+  "version": "1.0.0",
+  "description": "Projeto para reporte de falhas",
+  "license": "ISC",
+  "author": "Wendell Timóteo",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app",
+    "dev": "nodemon app"
+  },
+  "dependencies": {
+    "csv-stringify": "^6.6.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mongoose": "^8.17.1",
+    "nodemon": "^3.1.10",
+    "router": "^2.2.0",
+    "routes": "^2.1.0",
+    "start": "^5.1.0"
+  },
+  "devDependencies": {
+    "dotenv": "^17.2.2"
+  }
+}

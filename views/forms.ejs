@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="/logofundo.jpg" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <title>Reporte de Falhas</title>
+</head>
+<body>
+    <div class="container-1">
+        <div class="img container mt-4">
+            <img src="/logo-grande.png" alt="">
+        </div>
+        <div class="container mt-5">
+            <h2 class="mb-4">Cadastre o erro no formulário abaixo</h2>
+            <form action="/salvar_erro" method="POST">
+                <div class="mb-3">
+                    <label for="protocol" class="form-label">N° Protocolo</label>
+                    <input type="text" class="form-control" id="protocolo" name="protocol" placeholder="Insira o número de protocolo do atendimento" required>
+                </div>
+                <div class="mb-3">
+                    <label for="protocol" class="form-label">Nome do Cliente:</label>
+                    <input type="text" class="form-control" id="client" name="client" placeholder="Insira o nome da empresa do cliente" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email do Cliente</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Insira o e-mail do cliente" required>
+                </div>
+                <div class="mb-3">
+                    <label for="senha" class="form-label">Senha do Cliente</label>
+                    <input type="password" class="form-control" id="senha" name="senha" placeholder="Insira a senha do cliente" required>
+                </div>
+                <div class="mb-4">
+                    <label for="data" class="form-label">Data</label>
+                    <input type="datetime-local" class="form-control" id="data" name="data" required>
+                </div>
+                <div class="mb-3">
+                    <label for="protocol" class="form-label">Técnico:</label>
+                    <select class="form-select" name="tecnico" id="tecnico" required>
+                        <option value="">Selecione o Técnico</option>
+                        <option value="Douglas">Douglas</option>
+                        <option value="Vagner">Vagner</option>
+                        <option value="Wendell">Wendell</option>
+                    </select>
+                </div>                
+                <div class="mb-3">
+                    <label for="modulo" class="form-label">Módulo com Erro</label>
+                    <select class="form-select" id="modulo" name="modulo" required onchange="mostrarCamposOutros()">
+                        <option value="">Selecione</option>
+                        <option value="Financeiro">Financeiro</option>
+                        <option value="Orçamento">Orçamento</option>
+                        <option value="Serviços">Serviços</option>
+                        <option value="Relação de Materiais">Relação de Materiais</option>
+                        <option value="Plano de Corte">Plano de Corte</option>
+                        <option value="Projeto de Vidro">Projeto de Vidro</option>
+                        <option value="Produtos">Produtos</option>
+                        <option value="Preço dos Itens">Preço dos Itens</option>
+                        <option value="Relatórios">Relatórios</option>
+                        <option value="Funcionários">Funcionários/Administradores</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                </div>
+                <div id="outrosCampos" style="display: none;">
+                    <div class="mb-3">
+                        <label for="outro_modulo" class="form-label">Nome do Módulo</label>
+                        <input type="text" class="form-control" id="outro_modulo" name="outro_modulo">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição do Erro</label>
+                    <textarea class="form-control" id="descricao" name="descricao" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="link_erro" class="form-label">Link do vídeo sobre o Erro:</label>
+                    <input type="url" class="form-control" id="link_erro" name="link_erro" placeholder="Insira o link para o erro">
+                </div>
+                <button type="submit" id="add_btn"  class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
