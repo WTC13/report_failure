@@ -152,7 +152,7 @@
                 <div class="card p-4 shadow-sm mb-4">
                     <div class="elements">
                         <h5>Histórico do Cliente: <span><%= task_list.client %></span></h5>
-                        <button id="botaoMostrar"><i class="bi bi-arrow-down-short arrow-icon"></i></button>
+                        <a id="botaoMostrar"><i class="bi bi-arrow-down-short arrow-icon"></i></a>
                     </div>
                     <% if (history_list && history_list.length > 0) { %>
                         <div id="conteudoOculto" class="data-container">
@@ -171,6 +171,9 @@
                     <% } %>
                 </div>
             <% } %>
+            <div class="link-home">
+                <a href="/" class="button-home"><i class="bi bi-arrow-left"></i></a>
+            </div>
         </div>
     </section>
 

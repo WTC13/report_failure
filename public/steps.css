@@ -65,6 +65,24 @@ html{
     transform: rotate(180deg);
 }
 
+.link-home{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.button-home{
+    font-size: 24px;
+}
+
+.button-home i{
+    padding: 5px 12px 5px 12px;
+    background-color: var(--bg-gray);
+    border: var(--bg-black) solid 1.5px;
+    border-radius: 5px;
+}
+
 /* body{
     background-color: var(--bg-white);
 }
