@@ -58,7 +58,7 @@ const task_schema = new mongoose.Schema({
     },
     etapa:{
         type: String,
-        enum: ["Solicitação Reportada","Solicitação em Análise","Homologação","Produção"],
+        enum: ["Solicitação Reportada","Solicitação em Análise","Homologação","Produção","Valor Nulo"],
         default: "Solicitação Reportada"
     },
 });

@@ -49,8 +49,8 @@ if (botao) {
     // Pega o canvas só se ele existir
     const canvas = document.getElementById('etapasChart');
     if (canvas) {
-        const etapaAtual = canvas.getAttribute('data-etapa'); 
-        const porcentagem = etapasMap[etapaAtual] || 0;
+        const etapaAtual = (canvas.getAttribute('data-etapa') || "").trim();
+        const porcentagem = etapasMap[etapaAtual] ?? 0;
 
         // Registrar plugin
         Chart.register(ChartDataLabels);
@@ -72,14 +72,14 @@ if (botao) {
                     y: { display: false }
                 },
                 plugins: {
-                    legend: { display: false },
+                    legend: { display: true },
                     tooltip: { enabled: false },
                     datalabels: {
                         color: "#fff",
                         font: { family: "Poppins", weight: "bold", size: 14,},
                         align: "center",
                         anchor: "center",
-                        formatter: () => etapaAtual
+                        formatter: (value) => etapaAtual || ""
                     }
                 }
             }

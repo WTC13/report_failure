@@ -2,6 +2,7 @@ const { data } = require("jquery");
 const Protocolo = require("../models/task");
 const { prototype } = require("router");
 const { stringify } = require('csv-stringify');
+const task = require("../models/task");
 
 let message = "";
 let type = "";
@@ -87,13 +88,17 @@ const page_edit_report = async (req, res) => {
         const task_list = await Protocolo.findOne({protocol: protocol});
         // console.log("resultado da busca:", task_list);
 
+        if(!task_list){
+            // console.log("deu red");
+            return res.redirect("page_accompany_dev");
+        }
+
         const client_name = task_list.client;
         const history_list = await Protocolo.find({client: client_name});
-        // console.log("response: ", history_list);
-
+        
         res.render("steps", {
-            task_list: task_list,
-            history_list: history_list
+        task_list: task_list,
+        history_list: history_list
         });
     }
     catch(err){
